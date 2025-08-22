@@ -1,1 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gems_session,access_gems_session,gems_education.model_gems_session,,1,1,1,1
+access_gems_classroom,access_gems_classroom,gems_education.model_gems_classroom,,1,1,1,1
+access_gems_school,access_gems_school,gems_education.model_gems_school,,1,1,1,1
+access_gems_subject,access_gems_subject,gems_education.model_gems_subject,,1,1,1,1
