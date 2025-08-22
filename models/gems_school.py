@@ -15,5 +15,5 @@ class School(models.Model):
     faculty_member_ids=fields.One2many(string='Faculty',comodel_name='res.users',inverse_name='school_id')
     student_ids=fields.One2many(string='Students',comodel_name='res.users',inverse_name='school_id')
     classroom_ids=fields.One2many(string='Classrooms',comodel_name='gems.classroom',inverse_name='school_id')
-    subject_ids=fields.Many2many(string='Subjects',comodel_name='gems_subject')
-    session_ids=fields.One2many(string="Sessions",comodel_name='gems_session')
+    subject_ids=fields.Many2many(string='Subjects',comodel_name='gems.subject')
+    session_ids=fields.One2many(string="Sessions",comodel_name='gems.session',inverse_name='school_id')
