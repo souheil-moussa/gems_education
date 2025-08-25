@@ -61,7 +61,7 @@ class GemsSession(models.Model):
                     'res_id': student.id,
                     'activity_type_id': self.env.ref('mail.mail_activity_data_todo').id,
                     'summary': 'Review New Course',
-                    'date_deadline': date.today(),
+                    'date_deadline': fields.Date.today(),
                     'user_id': student.id,
                     'note': (
                         f"You have been registered for the subject {self.subject_id.name}. "
