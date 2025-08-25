@@ -8,12 +8,16 @@
             <form string="GEMS Session">
                 <sheet>
                     <group>
-                        <field name="subject_id"/>
-                        <field name="classroom_id"/>
-                        <field name="teacher_id"/>
-                        <field name="school_id"/>
+                        <group>
+                            <field name="subject_id"/>
+                            <field name="teacher_id"/>
+                            <field name="school_id"/>
+                        </group>
+                        <group>
+                            <field name="classroom_id"/>
+                            <field name ="grade"/>
+                        </group>
                     </group>
-
                     <notebook>
                         <page string="Date and Time">
                             <group>
