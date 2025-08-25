@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields,api
 
 class gemsclassroom(models.Model):
     _name = "gems.classroom"
@@ -9,5 +9,29 @@ class gemsclassroom(models.Model):
     capacity = fields.Integer(string="Capacity", required=True, default=5)
     has_projector = fields.Boolean(string="Has Projector?")
     has_smart_board = fields.Boolean(string="Has Smart Board?")
+    session_nb=fields.Integer(compute='count_sessions')
 
+    session_ids=fields.One2many(comodel_name='gems.session',inverse_name='classroom_id')
     _sql_constraints = [('unique_classroom_name_per_school','unique(name, school_id)','Classroom name must be unique within the same school!')]
+    
+    def classroom_session_button_action(self):
+        self.ensure_one()
+        return{
+        'type': 'ir.actions.act_window',
+        'name': 'Sessions',
+        'view_mode': 'list',
+        'res_model': 'gems.session',
+        'domain': [('classroom_id' ,'=', self.id)],
+        'context': "{'create': False}"
+        }
+    @api.depends('session_ids')
+    def count_sessions(self):
+        for record in self:
+            count = 0
+            if record.session_ids:
+                for room in record.session_ids:
+                    count+= 1
+            record.session_nb = count
+            
+                
+

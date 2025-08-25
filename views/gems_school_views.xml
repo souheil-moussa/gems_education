@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- gems.school form view -->
+    <record id="gems_school_view_form" model="ir.ui.view">
+        <field name="name">gems.school.view.form</field>
+        <field name="model">gems.school</field>
+        <field name="arch" type="xml">
+            <form string="Schools">
+				<header>
+					<div class='oe_button_box' name='button_box'>
+					<button type="object"
+					name="subject_button_action"
+                                        class="oe_stat_button"
+                                        invisible='subject_nb==0'
+					icon="fa-bullseye">
+				<field name='subject_nb' widget='statinfo' string='Subjects'></field>
+                        </button>
+
+                    <button type="object"
+					name="classroom_button_action"
+					class="oe_stat_button"
+                            invisible='classroom_nb==0'
+                                    icon="fa-home">
+						<field name='classroom_nb' widget='statinfo' string='Classrooms'></field>
+                        </button>
+
+                    <button type="object"
+					name="session_button_action"
+					class="oe_stat_button"
+                            invisible='session_nb==0'
+                            icon="fa-calendar">
+						<field name='session_nb' widget='statinfo' string='Sessions'></field>
+						</button>
+                    <button type="object"
+					name="faculty_button_action"
+					class="oe_stat_button"
+                            invisible='faculty_nb==0'
+                            icon="fa-briefcase">
+						<field name='faculty_nb' widget='statinfo' string='Faculty'></field>
+						</button>
+                    <button type="object"
+					name="student_button_action"
+					class="oe_stat_button"
+                            invisible='student_nb==0'
+                            icon="fa-group">
+						<field name='student_nb' widget='statinfo' string='Students'></field>
+						</button>
+
+					</div>
+
+
+
+
+				</header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="establishment_date"/>
+                    </group>
+                    <group string='Adress'>
+                        <field name="street_1"/>
+                        <field name="street_2"/>
+                        <field name="city"/>
+                        <field name="state_id"/>
+                        <field name="country_id"/>
+                        <field name="zip"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- gems.school list view -->
+    <record id="gems_school_view_list" model="ir.ui.view">
+        <field name="name">gems.school.view.list</field>
+        <field name="model">gems.school</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="establishment_date"/>
+            </list>
+        </field>
+    </record>
+
+<!-- gems.school action window -->
+<record id="gems_school_action" model="ir.actions.act_window">
+    <field name="name">Schools</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">gems.school</field>
+    <field name="view_mode">list,form</field>
+    </record>
+
+<menuitem id="gems_school_menu" name="Schools" parent='gems_session_root' sequence="1" action='gems_school_action'/>
+</odoo>

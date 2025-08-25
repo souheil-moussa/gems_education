@@ -14,4 +14,4 @@ class GemsSession(models.Model):
     start_time = fields.Datetime(string="Start Time (HH:MM)",required=True)
     end_time = fields.Datetime(string="End Time (HH:MM)",required=True)
     student_ids = fields.Many2many(comodel_name='gems.student', string='Students')
-    school_id = fields.Many2one(comodel_name='gems_school')
+    school_id = fields.Many2one(comodel_name='gems.school')

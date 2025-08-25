@@ -4,6 +4,18 @@
         <field name="model">gems.classroom</field>
         <field name="arch" type="xml">
             <form string="Classroom">
+                <header>
+                    <div class='oe_button_box' name='button_box'>
+                        <button type="object"
+					name="classroom_session_button_action"
+					class="oe_stat_button"
+                            invisible='session_nb==0'
+                            icon="fa-calendar">
+						<field name='session_nb' widget='statinfo' string='Sessions'></field>
+						</button>
+                    </div>
+                        
+                </header>
                 <sheet>
                     <group>
                         <field name="school_id"/>
