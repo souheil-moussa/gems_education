@@ -22,7 +22,7 @@ class School(models.Model):
     subject_nb=fields.Integer(compute='count_subjects')
     session_nb=fields.Integer(compute='count_sessions')
     faculty_nb=fields.Integer(compute='count_faculty')
-    student_nb=fields.Integer(compute='count_students')
+    student_nb=fields.Integer(compute='count_student')
 
     @api.depends('classroom_ids')
     def count_classrooms(self):
