@@ -1,6 +1,5 @@
 from odoo import models, fields
 from odoo.exceptions import ValidationError
-
 from odoo import api
 
 class GemsSession(models.Model):

@@ -25,8 +25,8 @@
                                 <field name="year"/>
                                 <field name="start_date"/>
                                 <field name="end_date"/>
-                                <field name="start_time" widget="float_time"/>
-                                <field name="end_time" widget="float_time"/>
+                                <field name="start_time"/>
+                                <field name="end_time"/>
                             </group>
                         </page>
 
