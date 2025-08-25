@@ -4,21 +4,18 @@ class User(models.Model):
     _inherit='res.users'
     
     school_id=fields.Many2one(comodel_name='gems.school',string='School')
-    gems_role=fields.Selection(selection=[('faculty','Faculty'),('student','Student')])
+    gems_role=fields.Selection(string="Role", related='partner_id.gems_role',readonly=False)
     session_nb=fields.Integer(compute='count_sessions')
     session_ids=fields.Many2many(comodel_name='gems.session')
 
 
 
-    dob = fields.Date(string='Date of Birth')
-    gender = fields.Selection(
-        [('male', 'Male'), ('female', 'Female')],
-        string='Gender'
-    )
+    dob = fields.Date(string='Date of Birth',related='partner_id.dob',readonly=False)
+    gender = fields.Selection(related='partner_id.gender',string='Gender',readonly=False)
     age_years = fields.Integer(string='Age (Years)', compute='_compute_age')
     age_months = fields.Integer(string='Age (Months)', compute='_compute_age')
     age = fields.Char(string='Age', compute='_compute_age')
-
+    student_id=fields.Char(string='Student Id',related='partner_id.student_id',readonly=False)
     def user_session_button_action(self):
         self.ensure_one()
         return{
@@ -65,3 +62,38 @@ class User(models.Model):
          if self.gems_role != 'student':
               self.dob = False
               self.gender = False
+    @api.model_create_multi
+    def create(self, vals_list):
+        seq_model = self.env['ir.sequence']
+
+        # Precompute student_id per record BEFORE create (no extra write, no recursion)
+        for vals in vals_list:
+            role = vals.get('gems_role')
+            if role == 'student' and not vals.get('student_id'):
+                gender = vals.get('gender')  # may be None if not passed
+                if gender == 'male':
+                    prefix = 'M'
+                elif gender == 'female':
+                    prefix = 'F'
+                else:
+                    prefix = 'X'
+                seq = seq_model.next_by_code('gems.student') or ''
+                vals['student_id'] = f"{prefix}{seq}"
+
+        users = super().create(vals_list)
+        return users
+    
+    def write(self, vals):
+        res = super().write(vals)  # apply normal changes first
+
+        for user in self:
+            if user.gems_role == 'student' and not user.student_id:
+                prefix = (
+                    'M' if user.gender == 'male'
+                    else 'F' if user.gender == 'female'
+                    else 'X'
+                )
+                seq = self.env['ir.sequence'].next_by_code('gems.student')
+                super(User, user).write({'student_id': f"{prefix}{seq}"})
+        return res
+

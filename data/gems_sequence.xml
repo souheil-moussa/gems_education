@@ -1,0 +1,8 @@
+<odoo noupdate="1">
+  <record id="seq_student_id" model="ir.sequence">
+    <field name="name">Student ID</field>
+    <field name="code">gems.student</field>
+    <field name="padding">5</field>
+    <field name="number_next">1</field>
+  </record>
+</odoo>
