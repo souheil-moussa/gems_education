@@ -74,4 +74,21 @@
         <field name="view_mode">list,form</field>
     </record>
 
+        <menuitem id="menu_school_root"
+              name="School Management"
+              parent="gems_session_root"
+              sequence="1"/>
+
+    <menuitem id="menu_school_classroom"
+              name="Classrooms"
+              parent="menu_school_root"
+              action="action_school_classroom"
+              sequence="1"/>
+
+    <menuitem id="menu_school_subject"
+              name="Subjects"
+              parent="menu_school_root"
+              action="action_school_subject"
+              sequence="2"/>
+
 </odoo>
