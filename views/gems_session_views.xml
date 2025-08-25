@@ -66,7 +66,7 @@
     <record id="gems_session_action" model="ir.actions.act_window">
         <field name="name">Sessions</field>
         <field name="res_model">gems.session</field>
-        <field name="view_mode">list,form,activity</field>
+        <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create a new session
