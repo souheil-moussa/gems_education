@@ -10,3 +10,5 @@ class Grade(models.Model):
     school_id = fields.Many2one(comodel_name="gems.school", string="School", required=True, ondelete="cascade")
 
     _sql_constraints = [('unique_grade_per_school', 'unique(name, school_id)', 'Grade name must be unique within the same school!')]
+
+    

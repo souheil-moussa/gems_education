@@ -32,6 +32,11 @@ class gemsclassroom(models.Model):
                 for room in record.session_ids:
                     count+= 1
             record.session_nb = count
+    @api.constrains('capacity')
+    def _check_capacity_not_full(self):
+        for record in self:
+            if record.capacity < 5:
+                raise ValidationError("Minimum Capacity is 5")
             
                 
 

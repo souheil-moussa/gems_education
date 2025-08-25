@@ -8,12 +8,17 @@
             <form string="GEMS Session">
                 <sheet>
                     <group>
-                        <field name="subject_id"/>
-                        <field name="classroom_id"/>
-                        <field name="teacher_id"/>
-                        <field name="school_id"/>
-                    </group>
+                        <group>
+                            <field name="subject_id"/>
 
+                            <field name="teacher_id"/>
+                            <field name="school_id"/>
+                        </group>
+                        <group>
+                            <field name="classroom_id"/>
+                            <field name="grade_id"/>
+                        </group>
+                    </group>
                     <notebook>
                         <page string="Date and Time">
                             <group>
@@ -22,7 +27,6 @@
                                 <field name="end_date"/>
                                 <field name="start_time" widget="float_time"/>
                                 <field name="end_time" widget="float_time"/>
-                                <field name="grade_id"/>
                             </group>
                         </page>
 
@@ -54,7 +58,6 @@
         </field>
     </record>
 
-
     <record id="gems_session_root" model="ir.ui.menu">
         <field name="name">Gems Education</field>
         <field name="web_icon">gems_education,static/description/icon.png</field>
@@ -63,7 +66,7 @@
     <record id="gems_session_action" model="ir.actions.act_window">
         <field name="name">Sessions</field>
         <field name="res_model">gems.session</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">list,form,activity</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create a new session
