@@ -18,3 +18,4 @@ class GemsSession(models.Model):
     student_ids = fields.Many2many(comodel_name='res.users', string='Students')  # Make sure this points to res.users
     school_id = fields.Many2one(comodel_name='gems.school')
 
+    
