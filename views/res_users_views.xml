@@ -15,7 +15,25 @@
 						<field name='session_nb' widget='statinfo' string='Sessions'></field>
 						</button>
             </xpath>
+            <xpath expr='//notebook' position='inside'>
+                <page name='student_info' string='Student Info' invisible="gems_role!='student'">
+                    <group>
+                        <field name='dob'></field>
+                        <field name="age"/>
+                        <field name='gender'></field>
+                    </group>
 
+            
+
+                </page>
+
+
+            </xpath>
+            <xpath expr="//page" position='inside'>
+                <group string="Gems Education">
+                <field name="gems_role"/>
+                </group>
+            </xpath>
 
 
 </field>
