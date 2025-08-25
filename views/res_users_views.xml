@@ -18,6 +18,7 @@
             <xpath expr='//notebook' position='inside'>
                 <page name='student_info' string='Student Info' invisible="gems_role!='student'">
                     <group>
+                            <field name='student_id'/>
                         <field name='dob'></field>
                         <field name="age"/>
                         <field name='gender'></field>

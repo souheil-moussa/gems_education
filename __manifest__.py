@@ -11,8 +11,9 @@
         'views/gems_classroom_subject_views.xml',
         'views/gems_school_views.xml',
         'views/res_users_views.xml',
-        'views/gems_grade_views.xml'
-        
+        'views/gems_grade_views.xml',
+        'data/gems_sequence.xml'
+
 
     ],
     'sequence': '1',
