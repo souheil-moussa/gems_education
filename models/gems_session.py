@@ -1,9 +1,13 @@
-from odoo import models, fields, api
+from odoo import models, fields
 from odoo.exceptions import ValidationError
 
 class GemsSession(models.Model):
     _name = "gems.session"
     _description = "Gems Session"
+
+
+    name = fields.Char(string="Session Name", required=True)
+    grade_id = fields.Many2one(comodel_name="gems.grade", string="Grade", required=True)
 
     subject_id = fields.Many2one(comodel_name='gems.subject', string='Subject',required=True)
     classroom_id = fields.Many2one(comodel_name='gems.classroom', string='classroom',required=True)
@@ -15,11 +19,3 @@ class GemsSession(models.Model):
     end_time = fields.Datetime(string="End Time (HH:MM)",required=True)
     student_ids = fields.Many2many(comodel_name='gems.school', string='Students')
     school_id = fields.Many2one(comodel_name='gems.school')
-
-    @api.constrains('start_time', 'end_time')
-    def _check_datetime(self):
-        """Ensure start_time is before end_time"""
-        for record in self:
-            if record.start_time and record.end_time:
-                if record.start_time > record.end_time:
-                    raise ValidationError("Start Time cannot be after End Time.")

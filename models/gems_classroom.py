@@ -1,6 +1,4 @@
-from odoo import models,fields
-from odoo import api
-from odoo.exceptions import ValidationError
+from odoo import models, fields,api
 
 class gemsclassroom(models.Model):
     _name = "gems.classroom"
@@ -34,10 +32,6 @@ class gemsclassroom(models.Model):
                 for room in record.session_ids:
                     count+= 1
             record.session_nb = count
-    @api.constrains('capacity')
-    def _check_minimal_classroom_capacity(self):
-        for record in self :
-            if record < 5:
-                raise ValidationError("The Minimum Classroom Capacity is 5 ")
+            
                 
 
