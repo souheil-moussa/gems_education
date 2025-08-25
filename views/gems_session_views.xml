@@ -9,8 +9,8 @@
                 <sheet>
                     <group>
                         <group>
+                            <field name="name"></field>
                             <field name="subject_id"/>
-
                             <field name="teacher_id"/>
                             <field name="school_id"/>
                         </group>
