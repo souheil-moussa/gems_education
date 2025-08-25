@@ -1,7 +1,7 @@
 {
     'name': 'Gems Education',
     'version': '1.0',
-    'depends': ['base','mail'],
+    'depends': [],
     'author': 'Souheil,Kevin,Charbel',
     'category': 'Inventory',
     'description': 'Manage Gems education system',
