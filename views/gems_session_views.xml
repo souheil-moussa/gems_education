@@ -1,97 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
-
-    <record id="view_school_classroom_form" model="ir.ui.view">
-        <field name="name">school.classroom.form</field>
-        <field name="model">gems.classroom</field>
+    <record id="gems_session_form_view" model="ir.ui.view">
+        <field name="name">gems.session.form.view</field>
+        <field name="model">gems.session</field>
+        <field name="priority">10</field>
         <field name="arch" type="xml">
-            <form string="Classroom">
+            <form string="GEMS Session">
                 <sheet>
                     <group>
+                        <field name="subject_id"/>
+                        <field name="classroom_id"/>
+                        <field name="teacher_id"/>
                         <field name="school_id"/>
-                        <field name="name"/>
-                        <field name="capacity"/>
-                        <field name="has_projector"/>
-                        <field name="has_smart_board"/>
                     </group>
+
+                    <notebook>
+                        <page string="Date and Time">
+                            <group>
+                                <field name="year"/>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                                <field name="start_time" widget="float_time"/>
+                                <field name="end_time" widget="float_time"/>
+                            </group>
+                        </page>
+
+                        <page string="Students">
+                            <field name="student_ids">
+                            </field>
+                        </page>
+                    </notebook>
+
                 </sheet>
             </form>
         </field>
     </record>
 
-    <record id="view_school_classroom_list" model="ir.ui.view">
-        <field name="name">school.classroom.list</field>
-        <field name="model">gems.classroom</field>
+    <record id="gems_session_list_view" model="ir.ui.view">
+        <field name="name">gems.session.list.view</field>
+        <field name="model">gems.session</field>
         <field name="arch" type="xml">
-            <list string="Classrooms">
+            <list>
+                <field name="subject_id"/>
+                <field name="classroom_id"/>
                 <field name="school_id"/>
-                <field name="name"/>
-                <field name="capacity"/>
-                <field name="has_projector"/>
-                <field name="has_smart_board"/>
+                <field name="teacher_id"/>
+                <field name="year"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
             </list>
         </field>
     </record>
 
-    <record id="action_school_classroom" model="ir.actions.act_window">
-        <field name="name">Classrooms</field>
-        <field name="res_model">gems.classroom</field>
-        <field name="view_mode">list,form</field>
+
+    <record id="gems_session_root" model="ir.ui.menu">
+        <field name="name">Gems Education</field>
+        <field name="web_icon">gems_education,static/description/icon.png</field>
     </record>
 
-
-    <record id="view_school_subject_form" model="ir.ui.view">
-        <field name="name">school.subject.form</field>
-        <field name="model">gems.subject</field>
-        <field name="arch" type="xml">
-            <form string="Subject">
-                <sheet>
-                    <group>
-                        <field name="school_id"/>
-                        <field name="name"/>
-                        <field name="book"/>
-                    </group>
-                </sheet>
-            </form>
+    <record id="gems_session_action" model="ir.actions.act_window">
+        <field name="name">Sessions</field>
+        <field name="res_model">gems.session</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new session
+            </p>
         </field>
     </record>
 
-    <record id="view_school_subject_list" model="ir.ui.view">
-        <field name="name">school.subject.list</field>
-        <field name="model">gems.subject</field>
-        <field name="arch" type="xml">
-            <list string="Subjects">
-                <field name="school_id"/>
-                <field name="name"/>
-                <field name="book"/>
-            </list>
-        </field>
-    </record>
-
-    <record id="action_school_subject" model="ir.actions.act_window">
-        <field name="name">Subjects</field>
-        <field name="res_model">gems.subject</field>
-        <field name="view_mode">list,form</field>
-    </record>
-
-
-
-    <menuitem id="menu_school_root"
-              name="School Management"
-              parent="gems_session_root"
-              sequence="1"/>
-
-    <menuitem id="menu_school_classroom"
-              name="Classrooms"
-              parent="menu_school_root"
-              action="action_school_classroom"
-              sequence="1"/>
-
-    <menuitem id="menu_school_subject"
-              name="Subjects"
-              parent="menu_school_root"
-              action="action_school_subject"
-              sequence="2"/>
+    <menuitem name="Sessions" id="gems_session_menu" action="gems_session_action" parent="gems_session_root" sequence="0"/>
 
 </odoo>
