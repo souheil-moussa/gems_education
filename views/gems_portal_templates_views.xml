@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="gems_portal_templates_list" name="My Sessions">
+        <t t-call="website.layout">
+            <div class="container mt16 mb16">
+                <h1>My Sessions</h1>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Grade</th>
+                            <th>Classroom</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="sessions" t-as="session">
+                            <tr>
+                                <td>
+                                    <a t-att-href="'/my/sessions/%d' % session.id">
+                                        <t t-esc="session.name"/>
+                                    </a>
+                                </td>
+                                <td><t t-esc="session.grade_id.name or ''"/></td>
+                                <td><t t-esc="session.classroom_id.name or ''"/></td>
+                                <td>
+                                    <t t-if="session.is_active">Active</t>
+                                    <t t-else="">Inactive</t>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="gems_portal_templates_form" name="Session Form">
+        <t t-call="website.layout">
+            <div class="container mt16 mb16">
+                <h1><t t-esc="session.name"/></h1>
+                <p><strong>Grade:</strong> <t t-esc="session.grade_id.name or ''"/></p>
+                <p><strong>Classroom:</strong> <t t-esc="session.classroom_id.name or ''"/></p>
+                <p><strong>Teacher:</strong> <t t-esc="session.teacher_id.name or ''"/></p>
+                <p><strong>Start:</strong> <t t-esc="session.start_time or ''"/></p>
+                <p><strong>End:</strong> <t t-esc="session.end_time or ''"/></p>
+                <p><strong>Status:</strong>
+                    <t t-if="session.is_active">Active</t>
+                    <t t-else="">Inactive</t>
+                </p>
+                <h3>Students</h3>
+                <ul>
+                    <t t-foreach="session.student_ids" t-as="student">
+                        <li><t t-esc="student.name"/></li>
+                    </t>
+                    <t t-if="not session.student_ids">
+                        <li>No students enrolled</li>
+                    </t>
+                </ul>
+            </div>
+        </t>
+    </template>
+</odoo>

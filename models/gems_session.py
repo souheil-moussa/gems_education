@@ -21,7 +21,7 @@ class GemsSession(models.Model):
     student_ids = fields.Many2many(comodel_name='res.users', string='Students') 
     school_id = fields.Many2one(comodel_name='gems.school')
     
-    is_active=fields.Boolean(string='Active', compute='_is_active_')
+    is_active=fields.Boolean(string='Active', compute='_is_active_',store=True)
 
 
     @api.constrains('start_time','end_time')
