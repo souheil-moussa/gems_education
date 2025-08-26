@@ -6,7 +6,9 @@
     'category': 'Inventory',
     'description': 'Manage Gems education system',
     'data': [
+        'security/gems_group.xml',
         'security/ir.model.access.csv',
+        'security/session_rule.xml',
         'views/gems_session_views.xml',
         'views/gems_classroom_subject_views.xml',
         'views/gems_school_views.xml',
