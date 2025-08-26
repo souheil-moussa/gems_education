@@ -6,6 +6,9 @@ class GemsSession(models.Model):
     _description = "Gems Session"
     _inherit = ["mail.thread", "mail.activity.mixin"]
 
+    instructor_id = fields.Many2one('res.users', string="Instructor")
+
+
     name = fields.Char(string="Session Name", required=True)
     grade_id = fields.Many2one(comodel_name="gems.grade", string="Grade", required=True)
     subject_id = fields.Many2one(comodel_name='gems.subject', string='Subject', required=True)
