@@ -34,12 +34,12 @@ class GemsSession(models.Model):
         Only notify newly added students (not removed).
         """
         for session in self:
-            # Compute newly added student IDs
+
             new_student_ids = []
             for command in student_commands:
-                if command[0] == 4:  # add existing id
+                if command[0] == 4:  
                     new_student_ids.append(command[1])
-                elif command[0] == 6:  # replace all
+                elif command[0] == 6: 
                     current = set(session.student_ids.ids)
                     new = set(command[2])
                     new_student_ids.extend(list(new - current))
@@ -48,7 +48,7 @@ class GemsSession(models.Model):
                 continue
 
             for student in self.env["res.users"].browse(new_student_ids):
-                # Prepare message
+
                 message = (
                     "You have been registered for the subject %s. "
                     "The session starts at %s and the timings are from %s to %s. "
@@ -61,13 +61,12 @@ class GemsSession(models.Model):
                     session.teacher_id.name,
                 )
 
-                # Send message in chatter
+
                 session.message_post(
                     body=message,
                     partner_ids=[student.partner_id.id],
                 )
 
-                # Create activity
                 self.env["mail.activity"].create({
                     "res_model_id": self.env["ir.model"]._get_id("gems.session"),
                     "res_id": session.id,
