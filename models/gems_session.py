@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from datetime import date
+from datetime import date, datetime
 
 class GemsSession(models.Model):
     _name = "gems.session"
@@ -18,6 +18,10 @@ class GemsSession(models.Model):
     end_time = fields.Datetime(string="End Time", required=True)
     student_ids = fields.Many2many(comodel_name='res.users', string='Students') 
     school_id = fields.Many2one(comodel_name='gems.school')
+    
+    is_active=fields.Boolean(string='Active', compute='_is_active_')
+
+
     @api.constrains('start_time','end_time')
     def _check_datetime(self):
         for record in self:
@@ -76,3 +80,9 @@ class GemsSession(models.Model):
                     "user_id": student.id,
                     "note": message,
                 })
+    def _is_active_(self):
+        for record in self:
+            if date.today()>record.start_date and date.today()<record.end_date:
+                record.is_active = True
+            else:
+                record.is_active= False
